@@ -10,7 +10,7 @@
 1. **Клонуй репозиторій**
 
     ```bash
-    git clone <URL-репозиторію>
+    git clone https://github.com/band-it-space/ai-search-frontend.git
     cd fastapi-react
 
     ```
