@@ -5,6 +5,8 @@ import axios from "axios";
 import { sx } from "./styles";
 import mixpanel from "mixpanel-browser";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const FormSearch = () => {
     const [query, setQuery] = useState("");
     const { updateResults, setLoading, loading } = useResult();
@@ -15,7 +17,11 @@ const FormSearch = () => {
         try {
             setLoading(true);
 
-            const response = await axios.get("http://13.48.134.142:8000/api/v1/search/", {
+            if (!BACKEND_URL) {
+                throw new Error("Server error, backend url missed");
+            }
+
+            const response = await axios.get(`${BACKEND_URL}/api/v1/search/`, {
                 params: {
                     query,
                     limit: 100,
@@ -37,8 +43,18 @@ const FormSearch = () => {
                 <h1>Пошуковий модуль</h1>
             </Box>
             <Box sx={sx.wrapper}>
-                <TextField label="Введіть пошуковий запит" value={query} onChange={(e) => setQuery(e.target.value)} sx={sx.input} />
-                <Button variant="contained" onClick={handleSearch} sx={sx.button} disabled={!query.trim() || loading}>
+                <TextField
+                    label="Введіть пошуковий запит"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    sx={sx.input}
+                />
+                <Button
+                    variant="contained"
+                    onClick={handleSearch}
+                    sx={sx.button}
+                    disabled={!query.trim() || loading}
+                >
                     {loading ? "Зачекайте..." : "Пошук"}
                 </Button>
             </Box>
@@ -49,11 +65,11 @@ const FormSearch = () => {
 export default FormSearch;
 
 const handleSendMessage = (query, resultsLength) => {
-    console.log(query, resultsLength)
-  
+    console.log(query, resultsLength);
+
     mixpanel.track("Message Sent", {
-      query: query,
-      resultsLength: resultsLength,
-      timestamp: new Date().toISOString(),
+        query: query,
+        resultsLength: resultsLength,
+        timestamp: new Date().toISOString(),
     });
-  };
+};
