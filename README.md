@@ -10,27 +10,34 @@
 1. **Клонуй репозиторій**
 
     ```bash
-    git clone <URL-репозиторію>
+    git clone https://github.com/band-it-space/ai-search-frontend.git
     cd fastapi-react
 
     ```
 
 2. **Встанови залежності**
 
-````bash
- npm install
+   ```bash
+   npm install
+
+   ```
 
 3. **Налаштуй .env**
- Створи файл .env у корені проекту та додай адресу свого бекенду:
+   
+   Створи файл .env у корені проекту та додай адресу свого бекенду:
 
-```env
- REACT_APP_BACKEND_URL=http://localhost:8000
+   ```env
+   REACT_APP_BACKEND_URL=http://localhost:8000
+
+   ```
 
 4. **Запусти розробницький сервер**
- Створи файл .env у корені проекту та додай адресу свого бекенду:
+   
+   Створи файл .env у корені проекту та додай адресу свого бекенду:
 
-```bash
- npm start
+   ```bash
+   npm start
+
+   ```
 
  Додаток буде доступний за адресою http://localhost:3000
-````
